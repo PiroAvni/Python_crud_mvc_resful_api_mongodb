@@ -1,12 +1,31 @@
 from flask import Blueprint
-from controllers import book_controller
+from controller import get_books, add_book,get_book,update_book,delete_book
 
-# Create a Blueprint object for the routes
+
+
+# Create the book_routes Blueprint
 book_routes = Blueprint('book_routes', __name__)
 
-# Define the routes and map them to the corresponding controller functions
-book_routes.route('/books', methods=['GET'])(book_controller.get_books)
-book_routes.route('/books', methods=['POST'])(book_controller.add_book)
-book_routes.route('/books/<book_id>', methods=['GET'])(book_controller.get_book)
-book_routes.route('/books/<book_id>', methods=['PUT'])(book_controller.update_book)
-book_routes.route('/books/<book_id>', methods=['DELETE'])(book_controller.delete_book)
+# # Import the controller after defining the Blueprint
+# from controller import book_controller
+
+# Define the routes using the book_routes Blueprint
+@book_routes.route('/books', methods=['GET'])
+def get_books():
+    return get_books()
+
+@book_routes.route('/books', methods=['POST'])
+def add_book():
+    return add_book()
+
+@book_routes.route('/books/<book_id>', methods=['GET'])
+def get_book(book_id):
+    return get_book(book_id)
+
+@book_routes.route('/books/<book_id>', methods=['PUT'])
+def update_book(book_id):
+    return update_book(book_id)
+
+@book_routes.route('/books/<book_id>', methods=['DELETE'])
+def delete_book(book_id):
+    return delete_book(book_id)
